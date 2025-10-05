@@ -1,3 +1,5 @@
+// George Toshiaki Shinohara - 187210
+// EP1 - Estatística Básica
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>

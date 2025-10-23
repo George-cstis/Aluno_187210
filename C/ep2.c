@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-
 typedef struct no {
     int numero;
     struct no *proximo;
@@ -16,13 +15,11 @@ typedef struct {
     NoListaLigada *fim;
 } Fila;
 
-
 // CRIA A FILA (Inicializa ponteiros)
 void criaFila(Fila *f) {
     f->inicio = NULL;
     f->fim = NULL;
 }
-
 
 // ENFILEIRAR (Insere no final da fila)
 void enfileirar(Fila *f, int valor) {
@@ -42,7 +39,6 @@ void enfileirar(Fila *f, int valor) {
     }
 }
 
-
 // DESENFILEIRAR (Remove do início da fila)
 int desenfileirar(Fila *f, int *valor) {
     NoListaLigada *ptr = f->inicio;
@@ -60,7 +56,6 @@ int desenfileirar(Fila *f, int *valor) {
     return 1;
 }
 
-
 // PEEK (Mostra o primeiro elemento da fila sem remover)
 int frente(Fila *f, int *valor) {
     if (f->inicio == NULL) {
@@ -70,19 +65,16 @@ int frente(Fila *f, int *valor) {
         return 1; 
 }
 
-
 // FILA VAZIA (Verifica se fila está vazia)
 int filaVazia(Fila *f) {
     return (f->inicio == NULL);
 }
-
 
 // Limpa buffer do teclado
 void clear_stdin_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
-
 
 // Programa principal
 int main() {

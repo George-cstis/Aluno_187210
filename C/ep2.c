@@ -5,7 +5,6 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-/////////////////////////////////////////////////////////////
 
 typedef struct no {
     int numero;
@@ -17,19 +16,19 @@ typedef struct {
     NoListaLigada *fim;
 } Fila;
 
-/////////////////////////////////////////////////////////////
-// Cria a fila (inicializa ponteiros)
+
+// CRIA A FILA (Inicializa ponteiros)
 void criaFila(Fila *f) {
     f->inicio = NULL;
     f->fim = NULL;
 }
 
-/////////////////////////////////////////////////////////////
-// ENFILEIRAR = insere no final da fila
+
+// ENFILEIRAR (Insere no final da fila)
 void enfileirar(Fila *f, int valor) {
     NoListaLigada *novoNo = malloc(sizeof(NoListaLigada));
     if (!novoNo) {
-        printf("\nERRO de alocação de memória\n");
+        printf("\n ERRO DE ALOCAÇÃO DE MEMÓRIA !! \n");
         exit(-1);
     }
     novoNo->numero = valor;
@@ -38,51 +37,53 @@ void enfileirar(Fila *f, int valor) {
     if (f->fim == NULL) { // fila vazia
         f->inicio = f->fim = novoNo;
     } else {
-        f->fim->proximo = novoNo;
+        f->fim-> proximo = novoNo;
         f->fim = novoNo;
     }
 }
 
-/////////////////////////////////////////////////////////////
-// DESINFILEIRAR = remove do início da fila
-int desinfileirar(Fila *f, int *valor) {
+
+// DESENFILEIRAR (Remove do início da fila)
+int desenfileirar(Fila *f, int *valor) {
     NoListaLigada *ptr = f->inicio;
-    if (!ptr) { // Fila vazia
+    // Verifica se a fila está vazia
+    if (!ptr) { 
         return 0;
     }
 
     *valor = ptr->numero;
-    f->inicio = ptr->proximo;
-    if (f->inicio == NULL) // fila ficou vazia
+    f-> inicio = ptr->proximo;
+    // A fila ficou vazia
+    if (f->inicio == NULL) 
         f->fim = NULL;
     free(ptr);
     return 1;
 }
 
-/////////////////////////////////////////////////////////////
-// FRENTE (PEEK) = mostra o primeiro elemento sem remover
+
+// PEEK (Mostra o primeiro elemento da fila sem remover)
 int frente(Fila *f, int *valor) {
     if (f->inicio == NULL) {
-        return 0;
+        return 0;  // A fila está vazia
     }
-    *valor = f->inicio->numero;
-    return 1;
+    *valor = f->inicio->numero;  // Copia o primeiro elemento da fila
+        return 1; 
 }
 
-/////////////////////////////////////////////////////////////
-// FILA VAZIA = verifica se fila está vazia
+
+// FILA VAZIA (Verifica se fila está vazia)
 int filaVazia(Fila *f) {
     return (f->inicio == NULL);
 }
 
-/////////////////////////////////////////////////////////////
-// Função para limpar buffer do teclado
+
+// Limpa buffer do teclado
 void clear_stdin_buffer() {
     int c;
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
-/////////////////////////////////////////////////////////////
+
 // Programa principal
 int main() {
     Fila fila;
@@ -92,41 +93,41 @@ int main() {
     char op = ' ';
 
     while (1) {
-        printf("\nQual operação Enfileira (E), Desenfileira (D), Frente (F), FilaVazia (V) ou Sai (X): ");
+        printf("\nQual operação Enfileira (E), Desenfileira (D), Peek (P), FilaVazia (V) ou Sai (X): ");
         op = toupper(getchar());
         clear_stdin_buffer();  // limpar '\n' do buffer
 
         switch (op) {
-            case 'E': // ENFILEIRAR
+            case 'E': // Enfileirar
                 printf("Entre com valor: ");
                 scanf("%d", &valor);
                 clear_stdin_buffer();
                 enfileirar(&fila, valor);
                 break;
 
-            case 'D': // DESINFILEIRAR
-                if (desinfileirar(&fila, &valor))
-                    printf("Valor removido: %d\n", valor);
+            case 'D': // Desenfileirar
+                if (desenfileirar(&fila, &valor))
+                    printf("Valor removido: %d \n", valor);
                 else
-                    printf("Fila vazia\n");
+                    printf("A fila está vazia \n");
                 break;
 
-            case 'F': // FRENTE
+            case 'P': // Peek
                 if (frente(&fila, &valor))
-                    printf("Valor na frente da fila: %d\n", valor);
+                    printf("Valor na frente da fila: %d \n", valor);
                 else
-                    printf("Fila vazia\n");
+                    printf("A fila está vazia. \n");
                 break;
 
-            case 'V': // FILA VAZIA
+            case 'V': // Fila Vazia
                 if (filaVazia(&fila))
-                    printf("Fila está vazia.\n");
+                    printf("A fila está vazia. \n");
                 else
-                    printf("Fila contém elementos.\n");
+                    printf("A fila têm elementos. \n");
                 break;
 
             case 'X':
-                printf("Encerrando programa...\n");
+                printf("Encerrando programa \n");
                 return 0;
 
             default:

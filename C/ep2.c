@@ -34,7 +34,7 @@ void enfileirar(Fila *f, int valor) {
     if (f->fim == NULL) { // fila vazia
         f->inicio = f->fim = novoNo;
     } else {
-        f->fim-> proximo = novoNo;
+        f->fim->proximo = novoNo;
         f->fim = novoNo;
     }
 }

@@ -21,7 +21,7 @@ void criaFila(Fila *f) {
     f->fim = NULL;
 }
 
-// ENFILEIRAR (Insere no final da fila)
+// ENFILEIRAR (Insere elemento no final da fila)
 void enfileirar(Fila *f, int valor) {
     NoListaLigada *novoNo = malloc(sizeof(NoListaLigada));
     if (!novoNo) {
@@ -39,7 +39,7 @@ void enfileirar(Fila *f, int valor) {
     }
 }
 
-// DESENFILEIRAR (Remove do início da fila)
+// DESENFILEIRAR (Remove elemento do início da fila)
 int desenfileirar(Fila *f, int *valor) {
     NoListaLigada *ptr = f->inicio;
     // Verifica se a fila está vazia
@@ -76,6 +76,12 @@ void clear_stdin_buffer() {
     while ((c = getchar()) != '\n' && c != EOF);
 }
 
+// Libera memória
+void limparFila(Fila *f) {
+    int valor;
+    while (desenfileirar (f, &valor));
+}
+
 // Programa principal
 int main() {
     Fila fila;
@@ -84,7 +90,7 @@ int main() {
     int valor;
     char op = ' ';
 
-    while (op!= 'X') {
+    while (op != 'X') {
         printf("\nQual operação Enfileira (E), Desenfileira (D), Peek (P), FilaVazia (V) ou Sai (X): ");
         op = toupper(getchar());
         clear_stdin_buffer();  // limpar '\n' do buffer
@@ -119,6 +125,7 @@ int main() {
                 break;
 
             case 'X':
+                limparFila(&fila);
                 printf("Encerrando programa \n");
                 return 0;
 

@@ -84,7 +84,7 @@ int main() {
     int valor;
     char op = ' ';
 
-    while (1) {
+    while (op!= 'X') {
         printf("\nQual operação Enfileira (E), Desenfileira (D), Peek (P), FilaVazia (V) ou Sai (X): ");
         op = toupper(getchar());
         clear_stdin_buffer();  // limpar '\n' do buffer
